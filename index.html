@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yuliya Guseva, Product Designer (UX/UI)</title>
+<meta name="description" content="Yuliya Guseva, Product Designer (UX/UI) in London. Internal platforms and operational tools for insurance, payments compliance and investment management.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nav:60px;
+  --bg:#EEF4FB; --surface:#FFFFFF; --ink:#0F2440; --muted:#4F6382; --line:#D3E0EF; --accent:#1F6FEB; --tint:#E1ECFB; --ok:#1B7A4E; --ok-bg:#DDF2E6;
+  --serif:"Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --sans:"Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#0B1626; --surface:#122238; --ink:#E6EEF8; --muted:#9DB0C8; --line:#22364F; --accent:#5CA2FF; --tint:#16304F; --ok:#6FD3A0; --ok-bg:#173327; }
+}
+:root[data-theme="dark"]{ --bg:#0B1626; --surface:#122238; --ink:#E6EEF8; --muted:#9DB0C8; --line:#22364F; --accent:#5CA2FF; --tint:#16304F; --ok:#6FD3A0; --ok-bg:#173327; }
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + var(--nav) + 16px); -webkit-text-size-adjust:100%}
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:1rem; line-height:1.6; -webkit-font-smoothing:antialiased}
+img{max-width:100%; display:block}
+a{color:inherit}
+button{font:inherit; color:inherit}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+
+.shell{display:grid; grid-template-columns:minmax(300px,34%) minmax(0,1fr)}
+.side{position:sticky; top:calc(env(safe-area-inset-top,0px) + var(--nav)); height:calc(100vh - var(--nav) - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px)); padding:clamp(28px,4vw,56px); display:flex; flex-direction:column; border-right:1px solid var(--line); overflow-y:auto}
+.main{padding:clamp(28px,4vw,56px) clamp(24px,4vw,64px) 96px; min-width:0}
+
+.name{font-family:var(--serif); font-weight:400; font-size:clamp(2.6rem,4.4vw,3.8rem); line-height:1; letter-spacing:-.02em; margin:0 0 6px; text-decoration:none; display:block}
+.what{color:var(--muted); margin:0 0 36px}
+.bio{font-family:var(--serif); font-size:1.3rem; line-height:1.45; margin:0 0 20px; max-width:30ch}
+.status{display:flex; align-items:center; gap:10px; font-size:.9375rem; margin:0 0 28px}
+.status i{width:8px; height:8px; border-radius:50%; background:var(--accent); flex:none}
+.side-foot{margin-top:auto; display:flex; flex-wrap:wrap; gap:8px 20px; padding-top:24px}
+.side-foot a{font-weight:500; text-decoration:underline; text-decoration-color:var(--line); text-underline-offset:4px; padding:4px 0}
+.side-foot a:hover{text-decoration-color:var(--accent); color:var(--accent)}
+
+/* Top navigation */
+.topnav{position:sticky; top:0; z-index:30; min-height:calc(var(--nav) + env(safe-area-inset-top,0px)); margin-top:calc(-1 * env(safe-area-inset-top,0px)); padding-top:env(safe-area-inset-top,0px); background:color-mix(in srgb, var(--bg) 97%, transparent); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+.topnav .bar{height:var(--nav); display:flex; align-items:center; justify-content:space-between; gap:24px; padding:0 clamp(20px,4vw,56px)}
+.brand{font-family:var(--serif); font-size:1.2rem; text-decoration:none; white-space:nowrap}
+.navlinks{display:flex; align-items:center; gap:clamp(14px,2.2vw,28px); margin:0; padding:0; list-style:none}
+.navlinks a, .navlinks summary{text-decoration:none; color:var(--muted); font-weight:500; font-size:.9375rem; cursor:pointer; padding:6px 0; display:inline-block}
+.navlinks a:hover, .navlinks summary:hover, .navlinks a[aria-current="true"]{color:var(--ink)}
+#work, #other, #experience, #education, #about, #contact, .chapter{scroll-margin-top:calc(var(--nav) + env(safe-area-inset-top,0px) + 16px)}
+
+.navlinks .short{display:none}
+
+/* Hero animation: a dense table gets redesigned */
+.order{position:relative; height:clamp(240px,26vw,320px); background:var(--surface); border:1px solid var(--line); border-radius:12px; overflow:hidden; margin:0 0 16px}
+.cell{position:absolute; left:0; top:0; border-radius:3px; background:color-mix(in srgb, var(--muted) 28%, var(--surface)); will-change:transform;
+  transition:transform .95s cubic-bezier(.65,0,.25,1), width .95s cubic-bezier(.65,0,.25,1), height .6s, opacity .5s, background-color .6s, border-radius .6s}
+.cell.hd{background:color-mix(in srgb, var(--muted) 55%, var(--surface))}
+.cell.grid{background:var(--line); border-radius:0; height:1px}
+.cell.primary{background:var(--ink)}
+.cell.secondary{background:color-mix(in srgb, var(--muted) 45%, var(--surface))}
+.cell.merged{background:color-mix(in srgb, var(--muted) 30%, var(--surface))}
+.cell.status{border-radius:999px; background:var(--accent)}
+.cell.status.ok{background:var(--ok)}
+.cell.status.warn{background:#E5A11A}
+.cell.tool{border-radius:999px; background:var(--surface); border:1.5px solid color-mix(in srgb, var(--muted) 35%, var(--surface)); display:flex; align-items:center; gap:6px; padding:0 9px; overflow:hidden; box-sizing:border-box; color:var(--muted)}
+.cell.tool svg{flex:0 0 auto}
+.cell.tool .tbar{display:block; flex:0 1 auto; height:5px; border-radius:3px; background:color-mix(in srgb, var(--muted) 40%, var(--surface))}
+.cell.tool.search{border-radius:8px; gap:7px}
+.cell.tool.search .caret{display:block; width:1.5px; height:10px; background:var(--accent); margin-left:-4px; animation:caret 1s steps(1) infinite}
+@keyframes caret{50%{opacity:0}}
+.cell.tool.fbtn{border-radius:7px; justify-content:center; padding:0; color:var(--ink)}
+.cell.tool.chip{justify-content:space-between; padding:0 8px 0 10px}
+.cell.tool.on{background:var(--accent); border-color:var(--accent); color:#fff}
+.cell.tool.on .tbar{background:rgba(255,255,255,.85)}
+.cell.hide{opacity:0}
+.order-cap{color:var(--muted); font-size:.875rem; margin:0 0 56px}
+@media (max-width:900px){ .order-cap{margin-bottom:44px} }
+
+/* Home intro */
+.home-side{justify-content:flex-start}
+.avatar{width:88px; height:88px; border-radius:50%; object-fit:cover; margin:0 0 22px; display:block}
+.home-side .name{font-size:clamp(2.4rem,3.6vw,3.2rem); margin-bottom:6px}
+.home-side .what{margin:0 0 28px}
+.home-side .bio{font-size:1.3rem; line-height:1.45; margin:0 0 14px; max-width:32ch}
+.home-side .bio2{margin:0 0 28px; color:var(--muted); font-size:.9688rem; max-width:44ch}
+.contact-row{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 4px}
+.contact-row a{display:inline-flex; align-items:center; padding:7px 14px; border-radius:999px; border:1px solid var(--line); background:var(--surface); text-decoration:none; font-weight:500; font-size:.9375rem; transition:border-color .15s, color .15s}
+.contact-row a:first-child{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+.contact-row a:hover{border-color:var(--accent); color:var(--accent)}
+.contact-row a:first-child:hover{background:var(--accent); border-color:var(--accent); color:#fff}
+
+/* Skills in the sidebar */
+.side-skills{padding-top:24px; margin-top:28px; border-top:1px solid var(--line)}
+.side-skills .label{margin-bottom:10px}
+.side-skills .chips li{font-size:.8125rem; padding:4px 11px}
+
+/* Home index */
+.label{font-size:.875rem; color:var(--muted); margin:0 0 12px}
+.index{list-style:none; margin:0 0 72px; padding:0; border-top:1px solid var(--ink)}
+.row a{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:24px; align-items:start; padding:26px 0 28px; border-bottom:1px solid var(--line); text-decoration:none}
+.row .kind{font-size:.875rem; color:var(--accent); font-weight:600; margin:0 0 6px}
+.row h2{font-family:var(--serif); font-weight:400; font-size:clamp(1.8rem,3.2vw,2.7rem); line-height:1.08; letter-spacing:-.015em; margin:0 0 10px; transition:color .15s; max-width:22ch}
+.row p.line{margin:0; color:var(--muted); max-width:52ch}
+.row .dur{font-size:.875rem; color:var(--muted); white-space:nowrap; padding-top:4px}
+.row a:hover h2, .row a:focus-visible h2{color:var(--accent)}
+.thumb{display:none}
+
+.peek{position:fixed; left:0; top:0; width:clamp(300px,30vw,460px); border-radius:6px; overflow:hidden; pointer-events:none; opacity:0; transform:translate(-9999px,0); z-index:20; background:var(--surface); box-shadow:0 18px 40px -18px rgba(24,27,34,.45)}
+.peek.on{opacity:1}
+.peek img, .thumb img{width:100%; height:auto}
+
+/* Case study */
+.case-side .back{text-decoration:none; color:var(--muted); font-weight:500; margin-bottom:40px; display:inline-block; padding:4px 0}
+.case-side .back{display:inline-flex; align-items:center; gap:8px}
+.case-side .back svg{transition:transform .2s}
+.case-side .back:hover{color:var(--accent)}
+.case-side .back:hover svg{transform:translateX(-3px)}
+.case-side .kind{font-size:.875rem; color:var(--accent); font-weight:600; margin:0 0 8px}
+.case-side h1{font-family:var(--serif); font-weight:400; font-size:clamp(2rem,3.2vw,2.9rem); line-height:1.06; letter-spacing:-.015em; margin:0 0 16px}
+.case-side .sum{font-family:var(--serif); font-size:1.15rem; line-height:1.45; margin:0 0 28px; color:var(--muted)}
+.facts{margin:0; display:grid; grid-template-columns:auto minmax(0,1fr); gap:8px 20px; border-top:1px solid var(--line); padding-top:20px}
+.facts dt{color:var(--muted)}
+.facts dd{margin:0; font-weight:500}
+.toc{margin-top:28px; padding-top:20px; border-top:1px solid var(--line)}
+.toc a{display:block; text-decoration:none; color:var(--muted); padding:3px 0; font-size:.9375rem}
+.toc a:hover{color:var(--accent)}
+
+.cover{border-radius:6px; overflow:hidden; margin-bottom:48px; background:var(--surface); border:1px solid var(--line)}
+.cover img{width:100%}
+.blk{margin:0 0 40px}
+.prose{max-width:66ch}
+.prose h3, .blk > h3{font-family:var(--serif); font-weight:500; font-size:1.45rem; line-height:1.2; margin:0 0 10px}
+.prose p{margin:0 0 14px}
+.chapter{display:flex; align-items:baseline; gap:16px; margin:72px 0 24px; padding-top:24px; border-top:1px solid var(--ink)}
+.chapter .n{font-family:var(--serif); font-size:1.1rem; color:var(--accent); min-width:1.6em}
+.chapter h2{font-family:var(--serif); font-weight:400; font-size:clamp(1.7rem,3vw,2.3rem); line-height:1.1; letter-spacing:-.01em; margin:0}
+
+.cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr)); gap:14px}
+.cards.even{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.home-sec{margin-top:64px}
+.card .meta{font-size:.8125rem; color:var(--accent); font-weight:600; margin:0 0 4px}
+.xp{list-style:none; margin:0; padding:0; border-top:1px solid var(--ink)}
+.xp li{display:grid; grid-template-columns:220px minmax(0,1fr); gap:4px 20px; padding:14px 0; border-bottom:1px solid var(--line); align-items:baseline}
+.xp-co{font-family:var(--serif); font-size:1.25rem}
+.xp-role{color:var(--muted)}
+.xpd{list-style:none; margin:0; padding:0; border-top:1px solid var(--ink)}
+.xpd > li{display:grid; grid-template-columns:260px minmax(0,1fr); gap:12px 40px; padding:32px 0; border-bottom:1px solid var(--line)}
+.xpd-head h3{font-family:var(--serif); font-weight:400; font-size:1.6rem; line-height:1.15; margin:0 0 4px}
+.xpd-head p{color:var(--muted); margin:0}
+.xpd-group + .xpd-group{margin-top:22px}
+.xpd-group h4{font-size:1rem; font-weight:600; margin:0 0 10px}
+.xpd-group .ul{max-width:72ch}
+.xpd-group .ul li{padding-bottom:8px; color:var(--muted)}
+.xp-dates{color:var(--muted); font-size:.875rem; white-space:nowrap; font-variant-numeric:tabular-nums}
+.chips{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:8px}
+.chips li{border:1px solid var(--line); background:var(--surface); border-radius:999px; padding:6px 14px; font-size:.9375rem}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:20px 22px}
+.card h4{margin:0 0 6px; font-size:1rem; font-weight:600}
+.card p{margin:0; color:var(--muted); font-size:.9688rem}
+
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr)); gap:14px}
+.stat{background:var(--tint); border-radius:8px; padding:22px 24px}
+.stat strong{display:block; font-family:var(--serif); font-weight:400; font-size:clamp(2.6rem,5vw,3.4rem); line-height:1; color:var(--accent); margin-bottom:8px}
+.stat span{font-size:.9375rem}
+
+.quote{font-family:var(--serif); font-style:italic; font-size:clamp(1.3rem,2.2vw,1.6rem); line-height:1.4; margin:0 0 40px; padding-left:20px; border-left:3px solid var(--accent); max-width:40ch}
+
+.steps{list-style:none; margin:0 0 40px; padding:0; display:flex; flex-wrap:wrap; gap:8px; counter-reset:s}
+.steps li{counter-increment:s; display:flex; gap:8px; align-items:baseline; border:1px solid var(--line); border-radius:999px; padding:6px 14px; font-size:.9375rem; background:var(--surface)}
+.steps li::before{content:counter(s); color:var(--accent); font-weight:600}
+
+.ul{margin:0; padding:0; list-style:none; max-width:66ch}
+.ul li{position:relative; padding:0 0 10px 22px}
+.ul li::before{content:""; position:absolute; left:2px; top:.65em; width:7px; height:7px; border-radius:50%; background:var(--accent)}
+.intro{margin:0 0 12px; max-width:66ch}
+
+figure{margin:0}
+.fig{background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:clamp(8px,1.5vw,16px); cursor:zoom-in; display:block; width:100%; text-align:left}
+.fig img{width:100%; height:auto; border-radius:3px}
+.fig.narrow img{max-width:640px; margin:0 auto}
+figcaption{color:var(--muted); font-size:.875rem; margin-top:10px}
+.pair{display:grid; grid-template-columns:1fr; gap:28px}
+.gallery{display:grid; grid-template-columns:1fr; gap:28px}
+
+.next{border-top:1px solid var(--ink); padding-top:20px; margin-top:80px}
+.next a{text-decoration:none; display:block}
+.next span{color:var(--muted); font-size:.875rem}
+.next strong{display:block; font-family:var(--serif); font-weight:400; font-size:clamp(1.7rem,3.2vw,2.6rem); line-height:1.1}
+.next a:hover strong{color:var(--accent)}
+
+/* Image viewer */
+dialog.viewer{border:0; padding:0; max-width:100vw; max-height:100vh; width:100vw; height:100vh; background:rgba(10,12,16,.92); margin:0}
+dialog.viewer::backdrop{background:transparent}
+.viewer .scroll{width:100%; height:100%; overflow:auto; display:flex; padding:calc(env(safe-area-inset-top,0px) + 56px) 16px calc(env(safe-area-inset-bottom,0px) + 24px)}
+.viewer img{margin:auto; max-width:none; width:min(1400px, 100%); background:#fff; border-radius:4px}
+.viewer .close{position:fixed; top:calc(env(safe-area-inset-top,0px) + 12px); right:16px; background:#fff; color:#181B22; border:0; border-radius:999px; padding:8px 16px; font-weight:600; cursor:pointer}
+.viewer .zoom{position:fixed; top:calc(env(safe-area-inset-top,0px) + 12px); left:16px; background:rgba(255,255,255,.15); color:#fff; border:0; border-radius:999px; padding:8px 16px; font-weight:600; cursor:pointer}
+.viewer.big img{width:max(1400px, 200%)}
+
+@media (prefers-reduced-motion: no-preference){
+  .row{animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+  .row:nth-child(2){animation-delay:.07s}.row:nth-child(3){animation-delay:.14s}.row:nth-child(4){animation-delay:.21s}
+  @keyframes rise{from{opacity:0; transform:translateY(14px)}to{opacity:1; transform:none}}
+  .peek{transition:opacity .18s}
+}
+
+@media (max-width:900px){
+  :root{--nav:52px}
+  .topnav .bar{gap:12px; padding:0 16px}
+  .brand{font-size:1rem}
+  .navlinks{gap:12px}
+  .navlinks a{white-space:nowrap; padding:8px 0; font-size:.8125rem}
+  .shell{display:block}
+  .side{position:static; height:auto; border-right:0; border-bottom:1px solid var(--line); padding:28px 20px 28px}
+  .main{padding:28px 20px 72px}
+  .side-foot{margin-top:4px; padding-top:8px}
+  .name{font-size:2.6rem}
+  .what{margin-bottom:24px}
+  .bio{font-size:1.2rem}
+  .row a{grid-template-columns:1fr; gap:0}
+  .row .dur{display:block; padding:6px 0 0; order:-1}
+  .xp li{grid-template-columns:1fr}
+  .xpd > li{grid-template-columns:1fr; padding:26px 0}
+  .home-sec{margin-top:48px}
+  .thumb{display:block; border-radius:6px; overflow:hidden; margin-top:16px; border:1px solid var(--line); background:var(--surface)}
+  .peek{display:none}
+  .case-side .back{margin-bottom:20px}
+  .toc{display:none}
+  .chapter{margin-top:56px}
+  .cover{margin-bottom:36px}
+}
+@media (max-width:360px){
+  .topnav .bar{padding:0 12px; gap:8px}
+  .brand{font-size:.9rem}
+  .navlinks{gap:9px}
+  .navlinks a{font-size:.75rem}
+}
+
+/* ===== Single-scroll layout ===== */
+.page{max-width:1180px; margin:0 auto; padding:0 clamp(20px,4vw,56px) 96px}
+.topnav .bar{max-width:1180px; margin:0 auto}
+.hero{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.05fr); gap:clamp(32px,5vw,72px); align-items:center; padding:clamp(48px,8vw,104px) 0 clamp(40px,6vw,72px)}
+.hero .name{font-family:var(--serif); font-weight:400; font-size:clamp(2.8rem,5.4vw,4.6rem); line-height:1; letter-spacing:-.025em; margin:0 0 10px}
+.hero .what{color:var(--muted); margin:0 0 28px}
+.hero .bio{font-family:var(--serif); font-size:clamp(1.25rem,1.9vw,1.5rem); line-height:1.4; margin:0 0 14px; max-width:34ch}
+.hero .bio2{color:var(--muted); margin:0 0 28px; max-width:52ch}
+.hero-art .order{margin-bottom:12px}
+.hero-art .order-cap{margin:0}
+.skills-strip{padding:8px 0 28px; border-bottom:1px solid var(--line)}
+.skills-strip .label{margin-bottom:12px}
+.skills-strip .chips li{font-size:.875rem}
+.home-sec.first{margin-top:clamp(56px,7vw,88px)}
+.home-sec{margin-top:88px}
+.index{margin-bottom:0}
+.row a{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:clamp(24px,4vw,56px); align-items:center; padding:clamp(28px,4vw,44px) 0}
+.row .thumb{display:block; border-radius:8px; overflow:hidden; border:1px solid var(--line); background:var(--surface); transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.row a:hover .thumb{transform:translateY(-4px)}
+.row .read{display:inline-block; margin-top:18px; font-weight:600; font-size:.9375rem; color:var(--accent)}
+.row h2{max-width:20ch}
+.peek{display:none}
+
+.case-head{padding:clamp(36px,6vw,72px) 0 36px}
+.case-head .back{display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:var(--muted); font-weight:500; margin-bottom:36px; padding:4px 0}
+.case-head .back svg{transition:transform .2s}
+.case-head .back:hover{color:var(--accent)}
+.case-head .back:hover svg{transform:translateX(-3px)}
+.case-head .kind{font-size:.875rem; color:var(--accent); font-weight:600; margin:0 0 10px}
+.case-head h1{font-family:var(--serif); font-weight:400; font-size:clamp(2.3rem,5vw,4rem); line-height:1.04; letter-spacing:-.02em; margin:0 0 18px; max-width:20ch}
+.case-head .sum{font-family:var(--serif); font-size:clamp(1.15rem,1.8vw,1.4rem); line-height:1.45; color:var(--muted); margin:0 0 36px; max-width:46ch}
+.case-head .facts{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr)); gap:20px 28px; border-top:1px solid var(--line); padding-top:22px; margin:0}
+.case-head .facts div{min-width:0}
+.case-head .facts dt{color:var(--muted); font-size:.875rem; margin-bottom:2px}
+.case-head .facts dd{margin:0; font-weight:500}
+.case-page .cover{margin:0 0 clamp(40px,6vw,72px)}
+.case-body{max-width:880px; margin:0 auto}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr; padding-top:36px; gap:32px}
+  .row a{grid-template-columns:1fr; gap:18px}
+  .row .thumb{order:-1; margin:0}
+  .home-sec{margin-top:64px}
+}
+
+/* Headings in the same typeface as body text */
+.hero .name, .name, .case-head h1, .case-side h1{font-weight:700; letter-spacing:-.035em}
+.row h2, .chapter h2, .next strong, .xpd-head h3, .xp-co{font-weight:600; letter-spacing:-.025em}
+.prose h3, .blk > h3{font-weight:600; letter-spacing:-.015em}
+.stat strong{font-weight:700; letter-spacing:-.03em; font-size:clamp(2rem,3.6vw,2.8rem)}
+.brand{font-weight:600; letter-spacing:-.01em}
+.hero .bio, .case-head .sum, .bio{font-weight:400; letter-spacing:-.01em}
+.quote{font-style:normal; font-weight:500}
+.chapter .n{font-weight:600}
+
+/* Contact block at the end of pages */
+.talk{margin-top:clamp(72px,9vw,120px); padding:clamp(32px,5vw,56px); background:var(--surface); border:1px solid var(--line); border-radius:16px}
+.talk h2{font-size:clamp(2rem,4.4vw,3.2rem); font-weight:700; letter-spacing:-.035em; line-height:1.05; margin:0 0 14px}
+.talk-text{color:var(--muted); max-width:52ch; margin:0 0 24px}
+.talk-mail{display:inline-block; font-size:clamp(1.15rem,2.4vw,1.6rem); font-weight:600; letter-spacing:-.015em; color:var(--accent); text-decoration:none; border-bottom:2px solid currentColor; margin:0 0 28px; word-break:break-word}
+.talk-mail:hover{color:var(--ink)}
+.case-page .talk{max-width:880px; margin-left:auto; margin-right:auto}
+.edu li{grid-template-columns:minmax(0,1.1fr) minmax(0,1.4fr) auto}
+@media (max-width:900px){ .edu li{grid-template-columns:1fr} }
+
+.xpd.collapsed .xp-more{display:none}
+.xp-toggle{display:inline-flex; align-items:center; gap:8px; margin-top:24px; padding:10px 18px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--ink); font-weight:600; font-size:.9375rem; cursor:pointer; transition:border-color .15s, color .15s}
+.xp-toggle:hover{border-color:var(--accent); color:var(--accent)}
+.xp-toggle svg{transition:transform .25s}
+.xp-toggle[aria-expanded="true"] svg{transform:rotate(180deg)}
+
+.xpd-head .xpd-dates{margin-top:6px; font-size:.875rem; font-variant-numeric:tabular-nums; color:var(--accent); font-weight:500}
+
+.hero .what{margin:0 0 16px; font-weight:500; color:var(--accent)}
+.hero h1.bio{font-size:clamp(1.6rem,2.8vw,2.3rem); line-height:1.25; font-weight:600; letter-spacing:-.025em; max-width:26ch; margin:0 0 18px}
+
+.card{display:flex; flex-direction:column}
+.card-link{display:inline-flex; align-items:center; gap:6px; margin-top:auto; padding-top:16px; font-weight:600; font-size:.9375rem; color:var(--accent); text-decoration:none}
+.card-link:hover{text-decoration:underline; text-underline-offset:3px}
+.card-link svg{transition:transform .2s}
+.card-link:hover svg{transform:translate(2px,-2px)}
+
+/* Hero contacts: email + LinkedIn as text links, CV as the one button */
+.hero-contact{display:flex; flex-direction:column; align-items:flex-start; gap:20px; padding-top:22px; border-top:1px solid var(--line)}
+.hc-links{display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px}
+.hc-link + .hc-link{position:relative}
+.hc-link{display:inline-flex; align-items:center; gap:7px; color:var(--ink); text-decoration:none; font-weight:500; font-size:.9688rem; padding:4px 0; white-space:nowrap}
+.hc-link svg{color:var(--accent); flex:none}
+.hc-link span{border-bottom:1px solid transparent; transition:border-color .15s}
+.hc-link:hover span{border-bottom-color:currentColor}
+.hc-link:hover{color:var(--accent)}
+.hc-link .hc-arrow{color:var(--muted); margin-left:-3px; transition:transform .2s}
+.hc-link:hover .hc-arrow{transform:translate(2px,-2px); color:var(--accent)}
+.hc-cv{display:inline-flex; align-items:center; gap:8px; padding:11px 20px 11px 16px; border-radius:999px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; font-size:.9375rem; box-shadow:0 6px 16px -8px color-mix(in srgb, var(--accent) 70%, transparent); transition:background .15s, transform .15s}
+.hc-cv:hover{background:color-mix(in srgb, var(--accent) 85%, #000); transform:translateY(-1px)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .hc-cv{color:#0B1626} }
+:root[data-theme="dark"] .hc-cv{color:#0B1626}
+
+/* Case studies: two per row, image on top */
+.index{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(28px,4vw,48px) clamp(20px,3vw,36px); border-top:0; padding-top:8px}
+.row{min-width:0}
+.row a{display:flex; flex-direction:column; align-items:stretch; gap:20px; padding:0; border-bottom:0; height:100%}
+.row .thumb{order:-1; aspect-ratio:16/10; margin:0}
+.row .thumb img{width:100%; height:100%; object-fit:cover; object-position:center}
+.row .kind{margin-bottom:8px}
+.row h2{font-size:clamp(1.35rem,2vw,1.7rem); line-height:1.2; max-width:none; margin-bottom:8px}
+.row p.line{font-size:.9688rem}
+.row .read{margin-top:14px}
+#work > .label{padding-bottom:16px; border-bottom:1px solid var(--ink); margin-bottom:28px}
+@media (max-width:760px){ .index{grid-template-columns:1fr} }
+
+/* Case studies in white cards */
+.row a{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:14px 14px 26px; gap:22px; box-shadow:0 1px 2px rgba(15,36,64,.04); transition:box-shadow .25s, transform .25s, border-color .25s}
+.row a:hover{transform:translateY(-3px); box-shadow:0 18px 40px -22px rgba(15,36,64,.35); border-color:color-mix(in srgb, var(--accent) 30%, var(--line))}
+.row a:hover .thumb{transform:none}
+.row .thumb{border-radius:12px; border:0}
+.row .row-text{padding:0 10px}
+.index{gap:clamp(20px,2.5vw,28px)}
+
+
+/* Hero intro: regular text, industries highlighted */
+.hero h1.bio, .hero .bio2{font-size:clamp(1.15rem,1.55vw,1.35rem); font-weight:400; line-height:1.6; letter-spacing:-.005em; color:var(--ink); max-width:38ch; margin:0 0 16px}
+.hero .bio2{margin-bottom:28px}
+.hero .hl{font-weight:600; color:var(--accent); background:linear-gradient(transparent 62%, color-mix(in srgb, var(--accent) 16%, transparent) 62%); padding:0 2px; border-radius:2px}
+
+/* Hero accent: short bold headline + one supporting line */
+.hero h1.bio{font-size:clamp(2.2rem,4.3vw,3.5rem); font-weight:700; line-height:1.08; letter-spacing:-.035em; max-width:17ch; margin:0 0 22px; color:var(--ink)}
+.hero .bio2{font-size:clamp(1.05rem,1.4vw,1.2rem); line-height:1.6; color:var(--muted); max-width:40ch; margin:0 0 30px}
+.hero .bio2 .hl{color:var(--ink)}
+
+/* Never upscale small screenshots: show them at native size, centred */
+.fig img{width:auto; max-width:100%; margin:0 auto}
+
+/* Next case studies at the end of each case */
+.more-cases{margin-top:clamp(72px,9vw,112px); padding-top:28px; border-top:1px solid var(--ink)}
+.more-cases > h2{font-size:1rem; font-weight:500; color:var(--muted); letter-spacing:0; margin:0 0 24px}
+.index.small .row h2{color:var(--ink); font-weight:600}
+.index.small h2{font-size:clamp(1.15rem,1.6vw,1.35rem)}
+.index.small .row p.line{font-size:.9375rem}
+.index.small .row a{gap:18px; padding-bottom:22px}
+
+.case-head .facts .fact-team{grid-column:1/-1}
+
+/* Before/after comparison with an arrow */
+.compare{display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); gap:16px; align-items:center}
+.compare figure{margin:0}
+.compare .fig img{width:100%; height:100%; aspect-ratio:16/10; object-fit:contain}
+.compare .cmp-arrow{margin-bottom:28px}
+.cmp-arrow{width:48px; height:48px; border-radius:50%; background:var(--accent); color:#fff; display:grid; place-items:center; box-shadow:0 6px 16px -8px color-mix(in srgb, var(--accent) 70%, transparent)}
+@media (max-width:760px){
+  .compare{grid-template-columns:1fr; justify-items:center}
+  .compare figure{width:100%}
+  .cmp-arrow{transform:rotate(90deg)}
+}
+
+.compare.natural .fig img{aspect-ratio:auto; height:auto; object-fit:initial}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="peek" id="peek" aria-hidden="true"></div>
+<dialog class="viewer" id="viewer" aria-label="Image viewer">
+  <button class="zoom" id="zoomBtn" type="button">Zoom in</button>
+  <button class="close" id="closeBtn" type="button">Close</button>
+  <div class="scroll"><img id="viewerImg" alt=""></div>
+</dialog>
+
+<script>
+/* Bundled images (generated). */
+const IMG = {
+"chor_before": "images/chor_before.jpg",
+"chor_before_song": "images/chor_before_song.jpg",
+"chor_competitors": "images/chor_competitors.jpg",
+"chor_create": "images/chor_create.jpg",
+"chor_desktop": "images/chor_desktop.jpg",
+"chor_flow": "images/chor_flow.jpg",
+"chor_ia": "images/chor_ia.jpg",
+"chor_list": "images/chor_list.jpg",
+"chor_mobile": "images/chor_mobile.jpg",
+"chor_mockups": "images/chor_mockups.jpg",
+"chor_persona": "images/chor_persona.jpg",
+"chor_proto": "images/chor_proto.jpg",
+"chor_song": "images/chor_song.jpg",
+"chor_testing": "images/chor_testing.jpg",
+"cover_chor": "images/cover_chor.jpg",
+"cover_markel": "images/cover_markel.jpg",
+"cover_risk": "images/cover_risk.jpg",
+"cover_tms": "images/cover_tms.jpg",
+"markel_after": "images/markel_after.jpg",
+"markel_before": "images/markel_before.jpg",
+"markel_dev": "images/markel_dev.jpg",
+"markel_dev_overview": "images/markel_dev_overview.jpg",
+"markel_flow": "images/markel_flow.jpg",
+"markel_research": "images/markel_research.jpg",
+"markel_uw_after": "images/markel_uw_after.jpg",
+"markel_uw_before": "images/markel_uw_before.jpg",
+"markel_visuals": "images/markel_visuals.jpg",
+"mk_bdg_new": "images/mk_bdg_new.jpg",
+"mk_bdg_old": "images/mk_bdg_old.jpg",
+"mk_col_new": "images/mk_col_new.jpg",
+"mk_col_old": "images/mk_col_old.jpg",
+"mk_typ_new": "images/mk_typ_new.jpg",
+"mk_typ_old": "images/mk_typ_old.jpg",
+"risk_colors": "images/risk_colors.jpg",
+"risk_components": "images/risk_components.jpg",
+"risk_edit": "images/risk_edit.jpg",
+"risk_ia": "images/risk_ia.jpg",
+"risk_profile": "images/risk_profile.jpg",
+"risk_report": "images/risk_report.jpg",
+"risk_sp": "images/risk_sp.jpg",
+"tms_board": "images/tms_board.jpg",
+"tms_creation": "images/tms_creation.jpg",
+"tms_flow": "images/tms_flow.jpg",
+"tms_list": "images/tms_list.jpg",
+"tms_order_after": "images/tms_order_after.jpg",
+"tms_order_before": "images/tms_order_before.jpg"
+};
+</script>
+<script>
+/* ==========================================================
+   EDIT YOUR CONTENT HERE
+   Text in square brackets is still a placeholder.
+   Images are bundled into this file (IMG.name). To use your
+   own image files instead, write a path like "images/x.jpg".
+   ========================================================== */
+const CONTENT = {
+  name: "Yuliya Guseva",
+  what: "Product Designer (UX/UI) in London",
+  bio: "I turn complex, data-heavy workflows into clear, usable products.",
+  bio2: "I am Yuliya Guseva, a Product Designer with 6 years of experience designing internal and SaaS products in **fintech**, **insurance**, **logistics** and **edtech**.",
+  links: [
+    { label: "Email", url: "mailto:yuguseva1704@gmail.com" },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/yuguseva17/" },
+    { label: "CV", url: "Yuliya_Guseva_Product_Designer_CV.pdf" }
+  ],
+
+  projects: [
+  /* ---------------- MARKEL ---------------- */
+  {
+    id: "underwriting-workflows",
+    title: "Simplifying complex underwriting workflows",
+    kind: "Internal platform · Insurance",
+    line: "Redesigning the underwriting workflow platform used daily by underwriting teams, so they can act on a whole policy at once instead of reference by reference.",
+    cover: IMG.cover_markel,
+    facts: [["Company","Global insurance company, London"],["Role","UX/UI Designer"],["Tools","Figma, AI tools"],["Platform","Web (desktop)"],["Team","Product Owner, Project Manager, 3 Business Analysts, UX/UI Designer, Engineering team, QA Engineers"]],
+    blocks: [
+      { type:"cards", items:[
+        { title:"The system", text:"The internal platform underwriters use to create and manage policies, moving business through each stage of the process until it is bound." },
+        { title:"The problem", text:"Users had to work at reference level, even when a policy contained several related references needing the same action. The same task, decision or update was repeated many times for one policy: slow, repetitive and prone to inconsistency." },
+        { title:"Business goal", text:"Keep existing functionality while moving from a reference-level to a policy-level way of working, so users can manage a whole policy at once, finish tasks faster and have a better experience overall." }
+      ]},
+      { type:"stats", items:[
+        { value:"50%+", label:"faster task completion" },
+        { value:"WCAG 2.1 AA", label:"accessibility standard applied across the redesign" }
+      ]},
+      { type:"text", heading:"My role", body:[
+        "I led the redesign of the platform's core processes, including Sanctions and Global Clearance checks, shifting users from a reference-by-reference way of working to a unified, policy-level workflow. I simplified the system while keeping familiar patterns intact and reducing clicks, which cut repetitive work and reduced task completion time by over 50%."
+      ]},
+      { type:"steps", items:["Stakeholder interviews","System analysis and user flows","Design","Design system and accessibility","Gathering user feedback","Handover and development support"] },
+
+      { type:"chapter", n:1, title:"Stakeholder interviews" },
+      { type:"text", body:["I interviewed stakeholders to understand how the system worked, uncover the main pain points users faced, and build a deeper understanding of the underwriting process as a whole. That gave me the context to understand why each process existed, not just how it functioned on the surface."] },
+
+      { type:"chapter", n:2, title:"System analysis and user flows" },
+      { type:"text", body:[
+        "I began with a current-state analysis of the platform, auditing existing screens and mapping how each type of business moves through it, from manual and NTU/decline pipelines to renewals and sub-IDs. This surfaced the edge cases and niche scenarios the redesign had to support, and showed exactly where the reference-level process broke down.",
+        "From there, I defined end-to-end user flows for each process, covering every role, decision point, system state and exception, and mapped each step to its corresponding screen. The flows became a shared source of truth for the Product Owner, Business Analysts and developers, keeping complex underwriting logic consistent across the product."
+      ] },
+      { type:"image", src:IMG.markel_research, caption:"Current-state analysis: mapping existing pipeline journeys and screens", narrow:true },
+      { type:"image", src:IMG.markel_flow, caption:"End-to-end user flows for Underwriter Authorities, covering the underwriter and approver paths, decision points and document upload" },
+      { type:"image", src:IMG.markel_visuals, caption:"User flows mapped to screens across each state of the Underwriter Authorities journey" },
+
+      { type:"chapter", n:3, title:"Design" },
+      { type:"text", body:[
+        "Redesigning the tasks was challenging, as each had its own distinct functionality. I needed to make them all consistent and easy to use without losing that individual complexity.",
+        "Throughout the process I worked closely with the Product Owner and Business Analysts to make sure nothing was missed and the designs matched the underlying functionality."
+      ]},
+      { type:"cards", heading:"What users told me", items:[
+        { title:"Nested scrolls", text:"Key details were buried inside scroll areas within scroll areas." },
+        { title:"Too many clicks", text:"Simple actions took far more steps than they should." },
+        { title:"Too many popups", text:"Work was constantly interrupted by modal windows." },
+        { title:"Hidden information", text:"Users had to open a full-screen view inside a popup just to see everything related to a task." }
+      ]},
+      { type:"text", heading:"What changed", body:[
+        "I redesigned the tasks in line with the design system so they're consistent across the board. A single global scroll replaced the nested ones. All policy references are now pre-selected, so actions apply to the whole policy by default. Popups were cut significantly, so users can act directly on the screen."
+      ]},
+      { type:"pair", items:[
+        { src:IMG.markel_before, caption:"Task before the redesign" },
+        { src:IMG.markel_after, caption:"Task after the redesign" }
+      ]},
+      { type:"text", heading:"Underwriter Authorities", body:[
+        "Underwriter Authorities checks whether an underwriter is allowed to write a given risk. If they're outside their limits, they need approval from a more senior underwriter.",
+        "This was an entirely new process. Approvals used to happen over email, which felt simpler to underwriters, but a new governance requirement meant it had to live inside the platform. My goal was to make that transition as easy as possible."
+      ]},
+      { type:"list", intro:"UAT sessions surfaced four key pain points:", items:[
+        "Too many clicks to complete the task",
+        "Viewing details meant navigating through multiple layers",
+        "No way to work across multiple references at once",
+        "No way to see comments at a glance"
+      ]},
+      { type:"text", body:["I redesigned the task to address each of these directly, and users responded positively when I presented the updated design."] },
+      { type:"pair", items:[
+        { src:IMG.markel_uw_before, caption:"Underwriter Authorities before" },
+        { src:IMG.markel_uw_after, caption:"Underwriter Authorities after" }
+      ]},
+
+      { type:"chapter", n:4, title:"Design system and accessibility" },
+      { type:"text", body:["I expanded and restructured the Figma design system with reusable components and patterns, and handed it over to the development team to keep the product consistent and scalable."] },
+      { type:"text", body:["The existing system had grown without clear rules: colours were grouped loosely, type styles overlapped, and components lacked documentation. I restructured the foundations into clear, documented tiers, defined the full range of shades and states, and added usage guidance and real product examples for every component."] },
+      { type:"text", heading:"Colours", body:["Reorganised into core brand colours, functional neutrals and status colours, each with a full range of shades and usage guidance."] },
+      { type:"compare", natural:true, before:{ src:IMG.mk_col_old, caption:"Before" }, after:{ src:IMG.mk_col_new, caption:"After" } },
+      { type:"text", heading:"Typography", body:["A single type hierarchy with defined sizes, weights, line heights and usage, plus an annotated example showing how styles are applied in the product."] },
+      { type:"compare", natural:true, before:{ src:IMG.mk_typ_old, caption:"Before" }, after:{ src:IMG.mk_typ_new, caption:"After" } },
+      { type:"text", heading:"Components", body:["Each component, such as badges, was documented by type and purpose, with guidance and real usage examples from the platform."] },
+      { type:"compare", natural:true, before:{ src:IMG.mk_bdg_old, caption:"Before" }, after:{ src:IMG.mk_bdg_new, caption:"After" } },
+      { type:"cards", heading:"WCAG 2.1 AA, applied across the redesign", items:[
+        { title:"Colour contrast", text:"Text and interface elements meet AA contrast ratios." },
+        { title:"Keyboard navigation", text:"Every task can be completed without a mouse." },
+        { title:"Focus states", text:"Clear, visible focus on every interactive element." },
+        { title:"Accessible forms", text:"Form patterns with proper labels, help text and error messages." }
+      ]},
+
+      { type:"chapter", n:5, title:"Gathering user feedback" },
+      { type:"text", body:["I led design presentations and review sessions with users, Product Owners, Business Analysts, senior stakeholders and developers to validate concepts, gather feedback, resolve technical constraints and drive alignment on design decisions."] },
+
+      { type:"chapter", n:6, title:"Handover and development support" },
+      { type:"text", body:[
+        "I prepared detailed, ready-for-development files in Figma, including all user flows and annotations describing exact system behaviour, so the Business Analyst could turn them into developer stories.",
+        "I attended refinement sessions with developers. When technical constraints made parts of a design infeasible, I iterated quickly and re-issued updated designs to keep delivery on track."
+      ]},
+      { type:"image", src:IMG.markel_dev_overview, caption:"Ready-for-development Figma file, organised into requester and approver flows and their scenarios", narrow:true },
+      { type:"image", src:IMG.markel_dev, caption:"An annotated scenario specifying exact system behaviour for developers. Every screen in the file was documented to the same level of detail." },
+
+      { type:"chapter", title:"Outcome" },
+      { type:"list", items:[
+        "Simplified a highly complex system into a more intuitive, user-friendly experience",
+        "Cut task completion time by over 50%",
+        "Enabled multi-reference actions at policy level, cutting repetitive manual work and improving consistency across related references",
+        "Expanded and restructured the design system and handed it over to the development team",
+        "Applied WCAG 2.1 AA standards across the redesign",
+        "Supported developers through implementation, resolving design questions and reviewing delivered work against specifications",
+        "Used AI tools to accelerate ideation and synthesise research notes, verifying every output against the requirements"
+      ]},
+      { type:"text", heading:"Reflection", body:[
+        "Working on a system this complex showed me how complicated flows can get, and how many niche scenarios there can be. However difficult the workflow, the design still needed to be understandable and easy to use.",
+        "It also taught me how important it is to balance user needs against technical feasibility. Covering the breadth of underwriting scenarios took constant, close collaboration between design, business analysis and development."
+      ]}
+    ]
+  },
+
+  /* ---------------- AFFIRMATIVE ---------------- */
+  {
+    id: "ach-compliance",
+    title: "ACH compliance and risk management platform",
+    kind: "SaaS · Fintech",
+    line: "Designing an ACH compliance and risk management platform from scratch for a US fintech serving banks and credit unions.",
+    cover: IMG.cover_risk,
+    facts: [["Client","US fintech providing treasury services and ACH compliance software to banks and credit unions"],["Role","Solo UX/UI Designer, plus BA duties"],["Tools","Figma, AI tools"],["Platform","Web (desktop)"],["Team","Product Owner, Project Manager, Business Analyst, Engineering team, QA Engineers"]],
+    blocks: [
+      { type:"cards", items:[
+        { title:"The product", text:"The Enterprise Monitoring & Alert Management Program is used by treasury and compliance teams to track ACH transactions, manage files and user roles, generate reports and act on real-time alerts." },
+        { title:"The problem", text:"Financial institutions are accountable for their ACH programmes under Nacha rules, yet much of the monitoring still happens through raw data exports and spreadsheets: slow, inconsistent and hard to evidence at audit." },
+        { title:"Business goal", text:"Replace that with one platform where compliance teams monitor transaction activity, manage originators and roles, act on alerts and generate reporting in one place." }
+      ]},
+      { type:"stats", items:[
+        { value:"4", label:"core modules designed end to end" },
+        { value:"4", label:"access levels in permission-aware flows" },
+        { value:"0 to 1", label:"design system built from the ground up" }
+      ]},
+      { type:"quote", text:"Because it runs inside regulated institutions, the design had to make risk legible at a glance, keep dense data scannable, and leave a clear trail behind every action." },
+      { type:"text", heading:"My role", body:["As the only UX/UI designer, I also took on Business Analyst responsibilities:"] },
+      { type:"list", items:[
+        "Communicated directly with the client to clarify requirements",
+        "Translated business needs into clear, actionable tasks for developers",
+        "Checked technical limitations with the development team and fed them back to the client, so we could adjust solutions together"
+      ]},
+      { type:"steps", items:["Stakeholder interview","Requirements analysis","Field study","Information architecture and user flows","Design system","Module design","Design review and implementation support"] },
+
+      { type:"chapter", n:1, title:"Stakeholder interview" },
+      { type:"text", body:["I interviewed stakeholders to get an initial vision of the business and the product, asking about competitors, users, and any known challenges or constraints. This helped set priorities early and shaped the direction for later design decisions."] },
+
+      { type:"chapter", n:2, title:"Requirements analysis" },
+      { type:"text", body:[
+        "I analysed the client's input to define what the system needed to do and which modules it should have, turning stakeholder requirements into a clear product definition.",
+        "This was the first project where I used AI as part of my process. Working in an unfamiliar regulatory domain, I used it to build my understanding of ACH compliance, summarise dense requirement documents, and pressure-test my own solutions before taking them to the client. It meant I arrived at discussions with informed questions rather than basic ones, and I verified every output against the client's requirements and domain expertise.",
+        "While analysing the requirements, I noticed several menu sections would be more intuitive if regrouped. I discussed this with the client and we agreed to go with the updated structure."
+      ]},
+
+      { type:"chapter", n:3, title:"Field study" },
+      { type:"text", body:["I studied leading companies' products and relevant articles to understand the industry and its competitors."] },
+      { type:"cards", heading:"What I found", items:[
+        { title:"Professional over friendly", text:"Services tend to look professional rather than user-friendly or modern, organised mostly around tables and widgets." },
+        { title:"Complex navigation", text:"Navigation is usually complex, and using all features takes significant training." },
+        { title:"Cluttered screens", text:"An excess of data and features makes systems feel crowded." },
+        { title:"Poor accessibility", text:"Small text, little spacing and low contrast are common across platforms." },
+        { title:"Emerging AI", text:"Some companies are adding machine learning and AI assistants." }
+      ]},
+      { type:"list", intro:"Which led to these recommendations:", items:[
+        "Keep the interface professional, but make it more user-friendly",
+        "Follow accessibility guidelines",
+        "Make the main tasks quick and straightforward to complete",
+        "Reduce the need for training through intuitive navigation",
+        "Provide a logical workflow across integrated systems under one login"
+      ]},
+
+      { type:"chapter", n:4, title:"Information architecture and user flows" },
+      { type:"text", body:["I structured the platform into its core modules: login, the home dashboard, reports, search, the account centre for service providers and originators, file management, and user and role management. For every screen I defined its content, table columns, search criteria, filters and available actions before any UI work began, so the full scope was agreed with the client up front."] },
+      { type:"image", src:IMG.risk_ia, caption:"Information architecture: every module, screen and its contents, from login to role management", narrow:true },
+
+      { type:"chapter", n:5, title:"Design system" },
+      { type:"text", body:["I built the design system from the ground up, with components, patterns and states, to keep every module consistent and speed up both design and development, following best practice from systems like Material Design and making full use of Figma components and auto layout. I covered the essentials up front and added new components as the work needed them."] },
+      { type:"pair", items:[
+        { src:IMG.risk_colors, caption:"Colour palette with interaction states, and the typography scale with usage guidelines" },
+        { src:IMG.risk_components, caption:"Examples of UI components" }
+      ]},
+
+      { type:"chapter", n:6, title:"Module design" },
+      { type:"text", body:[
+        "I designed four core modules end to end: ACH transaction monitoring, reporting dashboards, user and role management, and configurable alerts.",
+        "I translated regulatory requirements into user flows together with stakeholders, and designed permission-aware flows across four access levels: view-only, standard, manager and admin.",
+        "I ran regular walkthroughs with the client's product team, presenting options with trade-offs rather than a single solution, and iterated on their domain feedback. I also reviewed designs with engineering throughout to validate feasibility and agree component behaviour."
+      ]},
+      { type:"gallery", items:[
+        { src:IMG.risk_sp, caption:"Service providers" },
+        { src:IMG.risk_profile, caption:"Service provider profile" },
+        { src:IMG.risk_edit, caption:"Editing a service provider" },
+        { src:IMG.risk_report, caption:"Report: originators by effective date" }
+      ]},
+
+      { type:"chapter", n:7, title:"Design review and implementation support" },
+      { type:"text", body:["Once development began, I reviewed implemented screens against the specifications, resolved inconsistencies with developers, and adjusted patterns where technical constraints required it, keeping the delivered product aligned with the design system."] },
+
+      { type:"chapter", title:"Delivered" },
+      { type:"list", items:[
+        "End-to-end designs for four core modules: transaction monitoring, reporting dashboards, user and role management, and configurable alerts",
+        "A complete design system built from scratch, with components, patterns and states",
+        "Permission-aware flows across four access levels (view-only, standard, manager, admin), plus empty, loading, error and exception states across the product",
+        "Implemented features reviewed against the specifications"
+      ]},
+      { type:"text", heading:"Reflection", body:[
+        "This project took me through almost the full product design cycle, from gathering and analysing requirements to delivering polished UI. Acting as both designer and business analyst, I became the bridge between the client and the development team.",
+        "Most importantly, I learned to balance business goals, user experience and technical feasibility, and turn that balance into clear, consistent and scalable design."
+      ]}
+    ]
+  },
+
+  /* ---------------- GTZ ---------------- */
+  {
+    id: "logistics-tms",
+    title: "TMS for a logistics company",
+    kind: "Internal platform · Logistics",
+    line: "Redesigning a legacy CRM and freight management system that had grown through acquisitions and left users at dead ends.",
+    cover: IMG.cover_tms,
+    facts: [["Client","US logistics company"],["Role","UX/UI Designer"],["Tools","Adobe XD"],["Platform","Web (desktop)"],["Team","Product Owner, Project Manager, 2 UX/UI Designers, Engineering team, QA Engineers"]],
+    blocks: [
+      { type:"cards", items:[
+        { title:"The system", text:"A comprehensive logistics and freight management platform that streamlines shipping operations and improves supply chain visibility. It supports complex workflows, integrates multiple carriers, and gives users real-time tracking and order management." },
+        { title:"Business goal", text:"Simplify employees' tasks and speed up their work through an improved system." }
+      ]},
+      { type:"text", heading:"My role", body:["I was part of a design team of three, working alongside a Lead and a Senior UX/UI Designer on the redesign of the company's legacy CRM and freight management system.", "I owned large parts of the work end to end: interviewing stakeholders, analysing the existing system against usability heuristics, and mapping user flows to document how it really worked and where users reached dead ends. I then designed new screens, refined them based on user feedback, and reviewed implemented features with developers to make sure they matched the design specifications. Throughout the project, we ran regular brainstorms within the design team and shared insights to keep the experience consistent across the product."] },
+      { type:"steps", items:["Stakeholder interviews","System analysis","Information architecture and user flows","Design"] },
+
+      { type:"chapter", n:1, title:"Stakeholder interviews" },
+      { type:"text", body:["I interviewed stakeholders to understand the product, its current functionality and the business goals. This helped us get up to speed quickly and identify the areas that needed special attention."] },
+
+      { type:"chapter", n:2, title:"System analysis" },
+      { type:"text", body:["I then explored the system in depth, reviewing it for design consistency, usability heuristics and overall UX quality."] },
+
+      { type:"chapter", n:3, title:"Information architecture and user flows" },
+      { type:"text", body:[
+        "While analysing the system, I built the information architecture and user flows in parallel.",
+        "The system was outdated, and over time the company had acquired several smaller businesses and bolted their functionality onto it. That left noticeable gaps, situations where users could literally reach a dead end. Mapping the flows exposed these early, so we could fix them and significantly improve the experience."
+      ]},
+      { type:"image", src:IMG.tms_flow, caption:"A small part of the user flow. The full system was far larger.", narrow:true },
+
+      { type:"chapter", n:4, title:"Design" },
+      { type:"text", body:["Before designing, we spoke to users and gathered feedback on specific pages. Two of them shaped the design the most."] },
+
+      { type:"text", heading:"Order list", body:["Users needed to preview an order without leaving the list. We added a sidebar with key order information, and a link through to the full order page for everything else."] },
+      { type:"image", src:IMG.tms_list, caption:"Order list with the order preview sidebar" },
+
+      { type:"text", heading:"Order page", body:["Order details had been shown in a three-column grid. We switched to two columns, which adapts much better to smaller screens."] },
+      { type:"compare", before:{ src:IMG.tms_order_before, caption:"Before" }, after:{ src:IMG.tms_order_after, caption:"After" } },
+
+      { type:"text", heading:"Other pages", body:["The remaining screens were just as complex, with dozens of fields, statuses and actions on a single page. I used colour, typography and spacing to build a clear visual hierarchy: key information such as order status, dates and totals stands out, secondary details recede, and colour-coded indicators let users spot what needs attention at a glance."] },
+      { type:"image", src:IMG.tms_creation, caption:"Order creation" },
+      { type:"image", src:IMG.tms_board, caption:"Order board" },
+
+      { type:"text", body:["Throughout development, I regularly reviewed implemented features to make sure they matched the design specifications, and improved designs based on user feedback."] },
+      { type:"text", heading:"Reflection", body:[
+        "This was a challenging project because of the system's complexity. There was a lot to improve, and we had to communicate the issues clearly to stakeholders and justify each proposed change.",
+        "It significantly strengthened my skills in system analysis, information architecture, user flows, UI kits and UI design. I also worked closely with the other designers, running brainstorms and sharing insights. Most importantly, the work, guided by user feedback, genuinely improved the experience."
+      ]}
+    ]
+  },
+
+  /* ---------------- CHORDM ---------------- */
+  {
+    id: "chordm",
+    title: "ChorDm",
+    kind: "Web app · Entertainment",
+    line: "Redesigning a web app that helps people find songs and play them on guitar, and reshaping its feature roadmap through research.",
+    cover: IMG.cover_chor,
+    facts: [["Role","Solo UX/UI Designer"],["Tools","Figma"],["Platform","Web, mobile and desktop"]],
+    blocks: [
+      { type:"cards", items:[
+        { title:"The project", text:"A redesign of an existing web app for a stakeholder. The app lets users find songs and play them with a guitar." },
+        { title:"My role", text:"As the only designer, I reshaped the feature roadmap through competitor analysis, surveys, user interviews and usability testing. I ran field research, user interviews and user testing, analysed and organised the findings, and created wireframes, a UI kit, visual designs and prototypes." }
+      ]},
+      { type:"quote", text:"Goal: redesign the existing system with minimal changes to its functionality, in line with users' needs." },
+      { type:"steps", items:["Vision","Research","Ideate","Design and prototype","Track"] },
+
+      { type:"chapter", n:1, title:"Vision" },
+      { type:"list", intro:"I started with a stakeholder interview to understand their vision and expectations. Some of the questions I asked:", items:[
+        "What is your vision of the product?",
+        "What are the business goals?",
+        "What would a successful outcome look like to you?",
+        "Who are your customers at the moment?",
+        "Who are the key competitors, and what worries you about them?"
+      ]},
+      { type:"text", body:["A product analysis then showed the app's weaknesses, and a field analysis gave a quick overview of the market."] },
+      { type:"pair", items:[
+        { src:IMG.chor_before, caption:"Main page before the redesign" },
+        { src:IMG.chor_before_song, caption:"Song page before the redesign" }
+      ]},
+
+      { type:"chapter", n:2, title:"Research" },
+      { type:"text", heading:"Competitor analysis", body:["I analysed five direct competitors. The features they commonly offered were viewing chords, chords with lyrics, auto-scroll, changing key, adjusting font size, and extras like sharing, reporting errors and adding favourites."] },
+      { type:"image", src:IMG.chor_competitors, caption:"Competitor analysis of five direct competitors" },
+      { type:"text", heading:"Survey", body:["Before interviewing users, I ran a survey to understand the target audience, the devices they use and the products they use most."] },
+      { type:"stats", items:[
+        { value:"82%", label:"prefer to use the app on mobile" },
+        { value:"55.6%", label:"of them use Android" }
+      ]},
+      { type:"text", body:["The audience turned out to be young people who like playing guitar, and their favourite sites were Amdm, MyChords and Ultimate Guitar."] },
+      { type:"text", heading:"User interviews", body:["Interviews confirmed that people use these apps mainly to find a song and play it easily on guitar, and that the competitor features really do matter to them. We agreed with the stakeholder to implement those features."] },
+
+      { type:"chapter", n:3, title:"Ideate" },
+      { type:"text", body:["From the interviews and survey I built a primary persona covering the most common needs and pain points. It helped me prioritise features and persuade the stakeholder of the chosen approach."] },
+      { type:"image", src:IMG.chor_persona, caption:"Persona" },
+      { type:"image", src:IMG.chor_ia, caption:"Information architecture" },
+      { type:"image", src:IMG.chor_flow, caption:"User flow covering every page, action and system response" },
+
+      { type:"chapter", n:4, title:"Design and prototype" },
+      { type:"text", body:["I moved from wireframes to a UI kit, then to visual designs and clickable prototypes for both mobile and desktop."] },
+      { type:"image", src:IMG.chor_mockups, caption:"Wireframes for mobile and desktop" },
+      { type:"gallery", items:[
+        { src:IMG.chor_mobile, caption:"Mobile flow" },
+        { src:IMG.chor_desktop, caption:"Sign in page" },
+        { src:IMG.chor_list, caption:"Main page" },
+        { src:IMG.chor_song, caption:"Song page" },
+        { src:IMG.chor_create, caption:"Song creation" }
+      ]},
+      { type:"image", src:IMG.chor_proto, caption:"Clickable prototypes in Figma for both the mobile and desktop flows, with every screen linked" },
+
+      { type:"chapter", n:5, title:"Track" },
+      { type:"list", intro:"Main insights from user testing:", items:[
+        "Users found the app simple and had no trouble finding songs or adding them to favourites",
+        "The main issue was finding the Create Song button, which sat on the Profile page. We moved it to the main screen",
+        "Some users wanted to save a song as a draft if they started creating one but didn't want to finish it yet"
+      ]},
+      { type:"image", src:IMG.chor_testing, caption:"A remote user testing session" },
+
+      { type:"text", heading:"Conclusions", body:[
+        "This project confirmed again that user research is a crucial part of product development. It helped me find features missing from the original app and check whether everything competitors offered actually mattered to users. It also made it much easier to persuade the client to add or drop features, because the decisions were backed by research."
+      ]},
+      { type:"list", heading:"Next steps", items:[
+        "Add auto-scroll",
+        "Add a metronome to help with rhythm",
+        "Add a tuner for tuning instruments",
+        "Let users save songs as drafts",
+        "Add a social side, so users can connect with friends, see their songs and follow their progress"
+      ]}
+    ]
+  }
+  ],
+
+  also: [
+    { title:"Burdi", meta:"Consumer mobile app · Retail", text:"Designed a referral programme end to end, from research and user flows through to final UI." },
+    { title:"CityRide", meta:"Concept mobile app · Entertainment", link:{ label:"View on Behance", url:"https://www.behance.net/gallery/159026565/City-Ride" }, text:"Created an electric scooter app from scratch with full UX research, and onboarded and mentored a junior designer." },
+    { title:"Investment management CRM", meta:"Internal platform · Fintech", text:"Revised the UI kit for a multi-modular CRM and designed features for creating and managing merchants, plus admin tools." },
+    { title:"School learning platform", meta:"Web platform · Edtech", text:"Designed an LMS for students and parents to access homework, class schedules and academic performance." },
+    { title:"Oil & gas company", meta:"B2B platform · Energy sector", text:"Designed a CRM platform and a mobile app for two user roles: managers, who oversee users, products and orders, and dealers, who place orders and track them." }
+  ],
+
+  experience: [
+    { company:"Markel", role:"UX/UI Designer", place:"London", dates:"Mar 2026 – Sep 2026", groups:[
+      { title:"Enterprise insurance workflow platform", items:[
+        "Redesigned a complex underwriting workflow platform used daily by underwriting teams, cutting task completion time by over 50%",
+        "Mapped end-to-end system behaviour across multi-step processes, documenting user flows, states and edge cases so complex underwriting logic stayed consistent across the product",
+        "Expanded and restructured the Figma design system with reusable components and patterns, handing it over to the development team to ensure consistency and scalability",
+        "Produced annotated, ready-for-development specifications covering exact system behaviour, enabling Business Analysts to translate designs directly into developer stories",
+        "Led design presentations and review sessions with users, Product Owners, Business Analysts, senior stakeholders and developers to validate concepts, gather feedback, resolve technical constraints and drive alignment on design decisions",
+        "Applied WCAG 2.1 AA standards across the redesign, including colour contrast, keyboard navigation, focus states and accessible form patterns"
+      ]}
+    ]},
+    { company:"Freelance", role:"UX/UI Designer", place:"London", dates:"Aug 2025 – Dec 2025", groups:[
+      { title:"Client websites", items:[
+        "Redesigned client websites in line with updated business requirements",
+        "Worked closely with clients throughout the process, designing solutions for both mobile and desktop",
+        "Translated stakeholder requirements into user-friendly interfaces",
+        "Delivered wireframes, responsive UI design and a design system in Figma"
+      ]}
+    ]},
+    { company:"Opinov8", role:"UX/UI Designer", place:"London", dates:"Mar 2025 – Jul 2025", groups:[
+      { title:"ACH compliance and risk management platform", items:[
+        "Designed an ACH compliance and risk management platform from scratch for a US fintech serving banks and credit unions, covering transaction monitoring, reporting dashboards, role management and configurable alerts",
+        "Built the design system from the ground up, with components, patterns and states, ensuring consistency across all modules",
+        "Designed permission-aware flows across four access levels (view-only, standard, manager, admin)",
+        "Translated regulatory requirements into user flows with stakeholders, and reviewed implemented features against specifications",
+        "Used AI tools to accelerate domain research, summarise requirements and pressure-test design decisions in an unfamiliar regulatory area"
+      ]}
+    ]},
+    { company:"Freelance", role:"UX/UI Designer", place:"London", dates:"Jun 2023 – Mar 2025", groups:[
+      { title:"ChorDm, web app for musicians", items:[
+        "Reshaped the feature roadmap through competitor analysis, surveys, user interviews and usability testing",
+        "Delivered wireframes, a UI kit and designs for both mobile and web"
+      ]},
+      { title:"Burdi, mobile loyalty app", items:[
+        "Designed a referral programme end to end, from research and user flows through to final UI"
+      ]}
+    ]},
+    { company:"Opinov8", role:"UX/UI Designer", place:"Minsk", dates:"Aug 2021 – Jun 2023", groups:[
+      { title:"TMS for a logistics company", items:[
+        "Redesigned a legacy CRM system for a logistics company",
+        "Analysed the existing system and created user flows to document current functionality and identify gaps",
+        "Improved designs based on user feedback",
+        "Regularly reviewed implemented features to ensure consistency with the design specifications"
+      ]},
+      { title:"CityRide, concept mobile app for electric scooters", items:[
+        "Created a mobile app from scratch by gathering requirements and conducting full UX research",
+        "Onboarded and mentored a junior designer"
+      ]}
+    ]},
+    { company:"OxSoft", role:"UX/UI Designer", place:"Minsk", dates:"Nov 2020 – Aug 2021", groups:[
+      { title:"Multi-modular CRM system for investment management", items:[
+        "Revised the UI kit to align with the latest requirements and features",
+        "Designed features for creating and managing merchants, plus admin tools"
+      ]}
+    ]},
+    { company:"Freelance", role:"UX/UI Designer", place:"Minsk", dates:"May 2020 – Nov 2020", groups:[
+      { title:"Learning management system, Kazakhstan", items:[
+        "Designed an LMS interface for students and parents, giving access to homework, class schedules and academic performance"
+      ]},
+      { title:"CRM platform and mobile app, Kazakhstan", items:[
+        "Designed a CRM platform and a mobile app for field service and maintenance teams"
+      ]}
+    ]}
+  ],
+
+  skills: ["Internal tools and operational platforms","Complex workflows","Data-heavy UI","Design systems","Accessibility (WCAG 2.1 AA)","User research and usability testing","AI-assisted design","HTML/CSS and Python"],
+
+  education: { school:"Belarusian State Pedagogical University", degree:"Bachelor's degree (BSc), Mathematics and Computer Science", place:"Minsk", dates:"2016 – 2020" }
+};
+
+</script>
+<script>
+/* ============ You don't need to edit below this line ============ */
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const hl = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong class="hl">$1</strong>');
+function heroContacts(){
+  const L = CONTENT.links, find = f => L.find(f);
+  const mail = find(l => l.url.startsWith("mailto:")), li = find(l => /linkedin/i.test(l.url)), cv = find(l => /\.pdf$/i.test(l.url));
+  const ic = d => `<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+  return `<div class="hero-contact" id="contact">
+    <div class="hc-links">
+      ${mail ? `<a class="hc-link hc-mail" href="${esc(mail.url)}" target="_blank" rel="noopener noreferrer">${ic('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>')}<span>${esc(mail.url.replace("mailto:",""))}</span></a>` : ""}
+      ${li ? `<a class="hc-link" href="${esc(li.url)}" target="_blank" rel="noopener noreferrer">${ic('<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10.5V16M8 7.5v.01M12 16v-3.2c0-1.4 1-2.3 2.1-2.3S16 11.4 16 12.8V16M12 10.5V16"/>')}<span>LinkedIn</span><svg class="hc-arrow" aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>` : ""}
+      ${cv ? `<a class="hc-link" href="${esc(cv.url)}" target="_blank" rel="noopener noreferrer">${ic('<path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/>')}<span>Download CV</span></a>` : ""}
+    </div>
+  </div>`;
+}
+function contactBlock(){
+  const c = CONTENT, email = c.links.find(l => l.url.startsWith("mailto:"));
+  return `<section class="talk" aria-labelledby="talk-h">
+    <p class="label">Contact</p>
+    <h2 id="talk-h">Let's talk</h2>
+    <p class="talk-text">Open to product design roles working on complex, data-heavy products. The quickest way to reach me is email.</p>
+    ${email ? `<a class="talk-mail" href="${esc(email.url)}" target="_blank" rel="noopener noreferrer">${esc(email.url.replace("mailto:",""))}</a>` : ""}
+    <nav class="contact-row" aria-label="Other contacts">${c.links.filter(l => !l.url.startsWith("mailto:")).map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${esc(l.label)}</a>`).join("")}</nav>
+  </section>`;
+}
+const links = () => CONTENT.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${esc(l.label)}</a>`).join("");
+const slug = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+
+function home(){
+  const c = CONTENT;
+  return `<div class="page">
+    <section class="hero" id="about">
+      <div class="hero-text">
+        <p class="what">${esc(c.what)}</p>
+        <h1 class="bio">${hl(c.bio)}</h1>
+        ${c.bio2 ? `<p class="bio2">${hl(c.bio2)}</p>` : ""}
+        ${heroContacts()}
+      </div>
+      <div class="hero-art">${demoHTML()}</div>
+    </section>
+    ${c.skills?.length ? `<section class="skills-strip" aria-label="Skills"><p class="label">Skills</p><ul class="chips">${c.skills.map(s => `<li>${esc(s)}</li>`).join("")}</ul></section>` : ""}
+    <main>
+      <section class="home-sec first" id="work"><p class="label">Case studies</p>
+      <ol class="index">
+        ${c.projects.map(caseCard).join("")}
+      </ol></section>
+      ${c.also.length ? `<section class="home-sec" id="other"><p class="label">Also worked on</p>
+      <div class="cards">${c.also.map(a => `<div class="card">${a.meta ? `<p class="meta">${esc(a.meta)}</p>` : ""}<h4>${esc(a.title)}</h4><p>${esc(a.text)}</p>${a.link ? `<a class="card-link" href="${esc(a.link.url)}" target="_blank" rel="noopener noreferrer">${esc(a.link.label)}<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>` : ""}</div>`).join("")}</div></section>` : ""}
+    </main>
+  </div>`;
+}
+
+const caseCard = p => `<li class="row"><a href="#/work/${esc(p.id)}">
+          <div class="row-text">
+            <p class="kind">${esc(p.kind)}</p>
+            <h2>${esc(p.title)}</h2>
+            <p class="line">${esc(p.line)}</p>
+            <span class="read">Read case study</span>
+          </div>
+          <div class="thumb">${p.cover ? `<img src="${p.cover}" alt="" loading="lazy">` : ""}</div>
+        </a></li>`;
+const figure = (it, narrow) => `<figure><button type="button" class="fig${narrow ? " narrow" : ""}" aria-label="Open image: ${esc(it.caption)}"><img src="${it.src}" alt="${esc(it.caption)}" loading="lazy"></button>${it.caption ? `<figcaption>${esc(it.caption)}</figcaption>` : ""}</figure>`;
+
+function block(b){
+  switch(b.type){
+    case "chapter": return `<div class="chapter" id="${slug(b.title)}">${b.n ? `<span class="n">${b.n}</span>` : ""}<h2>${esc(b.title)}</h2></div>`;
+    case "text": return `<div class="blk prose">${b.heading ? `<h3>${esc(b.heading)}</h3>` : ""}${b.body.map(t => `<p>${esc(t)}</p>`).join("")}</div>`;
+    case "list": return `<div class="blk">${b.heading ? `<h3>${esc(b.heading)}</h3>` : ""}${b.intro ? `<p class="intro">${esc(b.intro)}</p>` : ""}<ul class="ul">${b.items.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>`;
+    case "cards": return `<div class="blk">${b.heading ? `<h3>${esc(b.heading)}</h3>` : ""}<div class="cards${b.items.length % 2 === 0 ? " even" : ""}">${b.items.map(c => `<div class="card"><h4>${esc(c.title)}</h4><p>${esc(c.text)}</p></div>`).join("")}</div></div>`;
+    case "stats": return `<div class="blk stats">${b.items.map(s => `<div class="stat"><strong>${esc(s.value)}</strong><span>${esc(s.label)}</span></div>`).join("")}</div>`;
+    case "quote": return `<blockquote class="quote">${esc(b.text)}</blockquote>`;
+    case "steps": return `<ol class="steps" aria-label="Design process">${b.items.map(t => `<li>${esc(t)}</li>`).join("")}</ol>`;
+    case "image": return `<div class="blk">${figure(b, b.narrow)}</div>`;
+    case "pair": return `<div class="blk pair">${b.items.map(it => figure(it)).join("")}</div>`;
+    case "compare": return `<div class="blk compare${b.natural ? " natural" : ""}">${figure(b.before)}<div class="cmp-arrow" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>${figure(b.after)}</div>`;
+    case "gallery": return `<div class="blk gallery">${b.items.map(it => figure(it)).join("")}</div>`;
+    default: return "";
+  }
+}
+
+function study(p){
+  const all = CONTENT.projects, i0 = all.indexOf(p), more = [1,2].map(k => all[(i0 + k) % all.length]).filter(x => x !== p);
+  return `<div class="page case-page">
+    <header class="case-head">
+      <a class="back" href="#/s/work"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>All work</a>
+      <p class="kind">${esc(p.kind)}</p>
+      <h1>${esc(p.title)}</h1>
+      <p class="sum">${esc(p.line)}</p>
+      <dl class="facts">${p.facts.map(([k,v]) => `<div${k === "Team" ? ' class="fact-team"' : ""}><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>
+    </header>
+    ${p.cover ? `<div class="cover"><img src="${p.cover}" alt="${esc(p.title)}"></div>` : ""}
+    <article class="case-body">
+      ${p.blocks.map(block).join("")}
+    </article>
+    ${more.length ? `<section class="more-cases" aria-labelledby="more-h"><h2 id="more-h">Next case studies</h2><ol class="index small">${more.map(caseCard).join("")}</ol></section>` : ""}
+
+  </div>`;
+}
+
+/* Top navigation */
+function nav(){
+  const c = CONTENT;
+  const items = [["about","About me","About", true],["work","Case studies","Work", true]].filter(i => i[3]);
+  return `<header class="topnav"><div class="bar">
+    <a class="brand" href="#/">${esc(c.name)}</a>
+    <nav aria-label="Site"><ul class="navlinks">${items.map(([id,label,short]) => `<li><a href="#/s/${id}"><span class="full">${label}</span><span class="short">${short}</span></a></li>`).join("")}</ul></nav>
+  </div></header>`;
+}
+/* Experience: show the latest role, expand to see all */
+document.addEventListener("click", e => {
+  const b = e.target.closest("#xpToggle"); if (!b) return;
+  const list = document.getElementById("xpList");
+  const open = list.classList.toggle("collapsed") === false;
+  b.setAttribute("aria-expanded", open);
+  b.querySelector("span").textContent = open ? "Show less" : "View all experience";
+  if (!open) document.getElementById("experience").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
+});
+
+/* Internal navigation: handled by the page itself, so it works even when the
+   page is embedded somewhere that intercepts link clicks. */
+let ROUTE = location.hash || "#/";
+function go(href){
+  ROUTE = href;
+  try { history.pushState(null, "", href); } catch (err) {}
+  render();
+}
+document.addEventListener("click", e => {
+  const a = e.target.closest('a[href^="#/"]');
+  if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  e.preventDefault();
+  e.stopPropagation();
+  go(a.getAttribute("href"));
+}, true);
+window.addEventListener("popstate", () => { ROUTE = location.hash || "#/"; render(); });
+
+/* Hero animation: a dense, hard-to-read table gets redesigned:
+   columns are grouped, key data is emphasised, statuses become pills,
+   a filter bar appears and irrelevant rows are filtered out. */
+const DT = { rows: 8, cols: 9, keep: [0,2,3,5,7] };
+function demoHTML(){
+  let h = "";
+  for (let c = 0; c < DT.cols; c++) h += `<span class="cell hd" data-hd="${c}"></span>`;
+  for (let r = 0; r <= DT.rows; r++) h += `<span class="cell grid" data-grid="${r}"></span>`;
+  for (let r = 0; r < DT.rows; r++) for (let c = 0; c < DT.cols; c++) h += `<span class="cell" data-r="${r}" data-c="${c}"></span>`;
+  const ico = (d, w = 12) => `<svg width="${w}" height="${w}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+  h += `<span class="cell tool search" data-tool="search">${ico('<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>')}<i class="tbar" style="width:46%"></i><i class="caret"></i></span>`;
+  const chipW = ["58%","48%","52%"];
+  for (let i = 0; i < 2; i++) h += `<span class="cell tool chip" data-tool="chip${i}"><i class="tbar" style="width:${chipW[i]}"></i>${ico('<path d="M6 9l6 6 6-6"/>', 10)}</span>`;
+  return `<div class="order" id="demo" role="img" aria-label="Abstract animation: a dense table with many columns is redesigned into a clear, filtered, readable table">${h}</div>
+  <p class="order-cap">Making dense data clear and easy to scan.</p>`;
+}
+let demoGen = 0;
+function runDemo(){
+  const gen = ++demoGen;
+  const box = document.getElementById("demo"); if (!box) return;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const alive = () => gen === demoGen && document.body.contains(box);
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const q = sel => [...box.querySelectorAll(sel)];
+  const cells = q("[data-r]"), heads = q("[data-hd]"), grids = q("[data-grid]"), tools = q("[data-tool]");
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  let widths = [];
+  const reroll = () => { widths = cells.map(() => rnd(.45, .95)); };
+  const set = (el, x, y, w, h, extra = {}) => {
+    el.style.transform = `translate(${x}px,${y}px)`; el.style.width = w + "px"; el.style.height = h + "px";
+    el.style.transitionDelay = (extra.delay || 0) + "ms";
+    el.style.opacity = extra.opacity ?? 1;
+  };
+  const cls = (el, list) => { el.classList.remove("primary","secondary","merged","status","ok","warn","hide"); list.forEach(c => c && el.classList.add(c)); };
+
+  function messy(){
+    const W = box.clientWidth, H = box.clientHeight, pad = Math.max(14, W * .04);
+    const top = pad + 6, colW = (W - pad * 2) / DT.cols, rowH = (H - top - pad - 14) / DT.rows, h = Math.max(4, Math.min(6, rowH * .32));
+    heads.forEach((el, c) => { cls(el, []); set(el, pad + c * colW + 3, top, colW * .7, 5, {delay: 0}); });
+    grids.forEach((el, r) => { set(el, pad, top + 14 + r * rowH, W - pad * 2, 1, {opacity: 1}); });
+    cells.forEach((el, i) => {
+      const r = +el.dataset.r, c = +el.dataset.c;
+      cls(el, []);
+      set(el, pad + c * colW + 3, top + 14 + r * rowH + (rowH - h) / 2, Math.max(6, (colW - 6) * widths[i]), h, {delay: 0});
+    });
+    tools.forEach(el => { set(el, pad, -30, 10, 10, {opacity: 0}); });
+  }
+
+  function clean(){
+    const W = box.clientWidth, H = box.clientHeight, pad = Math.max(16, W * .055);
+    const inner = W - pad * 2;
+    // toolbar
+    const tbY = pad, tbH = 24;
+    const narrow = inner < 380, searchW = inner * (narrow ? .42 : .44), chipW = narrow ? 64 : Math.max(56, inner * .16), gap = 6, fx = pad + searchW + 10;
+    tools.forEach(el => {
+      const k = el.dataset.tool;
+      if (k === "search") set(el, pad, tbY, searchW, tbH, {delay: 900});
+      else { const i = +k.slice(4), x = fx + i * (chipW + gap); const fits = x + chipW <= W - pad + 2; set(el, x, tbY, chipW, tbH, {delay: 1060 + i * 90, opacity: fits ? 1 : 0}); }
+    });
+    const headY = tbY + tbH + 18;
+    const col = { a: 0, b: inner * .48, s: inner * .78 };
+    heads.forEach((el, c) => {
+      cls(el, []);
+      const map = {0: col.a, 2: col.b, 7: col.s};
+      if (c in map) set(el, pad + map[c], headY, c === 7 ? inner * .1 : inner * .14, 5, {delay: 300});
+      else set(el, pad + (c === 1 ? col.a : c === 3 ? col.b : col.s), headY, 6, 5, {delay: 0, opacity: 0});
+    });
+    const bodyTop = headY + 14, rowH = (H - bodyTop - pad) / DT.keep.length;
+    grids.forEach((el, r) => {
+      if (r <= DT.keep.length) set(el, pad, bodyTop + r * rowH, inner, 1, {delay: 500});
+      else set(el, pad, bodyTop + DT.keep.length * rowH, inner, 1, {delay: 0, opacity: 0});
+    });
+    const statusKinds = ["ok", "", "warn", "ok", ""];
+    cells.forEach((el, i) => {
+      const r = +el.dataset.r, c = +el.dataset.c, k = DT.keep.indexOf(r);
+      const yMid = bodyTop + Math.max(0, k) * rowH + rowH / 2;
+      if (k < 0){ // filtered out
+        cls(el, []); set(el, el._x || 0, (el._y || 0) + 6, el._w || 10, 5, {delay: 700, opacity: 0});
+        return;
+      }
+      const d = 300 + k * 70;
+      if (c === 0){ cls(el, ["primary"]); set(el, pad + col.a, yMid - 9, inner * (.24 + widths[i] * .14), 8, {delay: d}); }
+      else if (c === 1){ cls(el, ["secondary"]); set(el, pad + col.a, yMid + 4, inner * (.14 + widths[i] * .1), 5, {delay: d + 60}); }
+      else if (c === 2){ cls(el, ["merged"]); set(el, pad + col.b, yMid - 3, inner * (.14 + widths[i] * .1), 6, {delay: d + 120}); }
+      else if (c === 3){ cls(el, ["merged"]); set(el, pad + col.b, yMid - 3, inner * .1, 6, {delay: d + 120, opacity: 0}); }
+      else if (c === 7){ const s = statusKinds[k]; cls(el, ["status", s]); set(el, pad + col.s, yMid - 6, inner * .11, 12, {delay: d + 260}); }
+      else { cls(el, []); set(el, pad + (c < 7 ? col.b : col.s), yMid - 3, 6, 5, {delay: 0, opacity: 0}); }
+    });
+  }
+  const remember = () => cells.forEach(el => { const m = /translate\(([-\d.]+)px,\s*([-\d.]+)px\)/.exec(el.style.transform) || []; el._x = +m[1] || 0; el._y = +m[2] || 0; el._w = parseFloat(el.style.width) || 10; });
+
+  reroll();
+  if (reduce){ messy(); remember(); clean(); return; }
+  (async () => {
+    box.querySelectorAll(".cell").forEach(el => el.style.transition = "none");
+    messy(); remember();
+    void box.offsetWidth;
+    box.querySelectorAll(".cell").forEach(el => el.style.transition = "");
+    while (alive()){
+      await wait(2600); if (!alive()) return;
+      remember(); clean();
+      await wait(4800); if (!alive()) return;
+      reroll(); messy();
+    }
+  })();
+}
+let demoW = innerWidth, demoT;
+window.addEventListener("resize", () => { if (innerWidth === demoW) return; demoW = innerWidth; clearTimeout(demoT); demoT = setTimeout(() => { if (document.getElementById("demo")) runDemo(); }, 250); });
+
+/* Hover preview on the home page */
+const peek = document.getElementById("peek");
+function bindPeek(){
+  if (!matchMedia("(hover:hover) and (min-width:901px)").matches) return;
+  document.querySelectorAll(".row a").forEach(a => {
+    a.addEventListener("mouseenter", () => {
+      const p = CONTENT.projects[a.dataset.i];
+      if (!p.cover) return;
+      peek.innerHTML = `<img src="${p.cover}" alt="">`;
+      peek.classList.add("on");
+    });
+    a.addEventListener("mouseleave", () => peek.classList.remove("on"));
+  });
+}
+document.addEventListener("mousemove", e => {
+  if (!peek.classList.contains("on")) return;
+  const w = peek.offsetWidth, h = peek.offsetHeight;
+  const x = Math.min(e.clientX + 24, innerWidth - w - 16), y = Math.min(Math.max(e.clientY - h/2, 16), innerHeight - h - 16);
+  peek.style.transform = `translate(${x}px,${y}px)`;
+});
+
+/* Image viewer: tap any screenshot to see it large */
+const viewer = document.getElementById("viewer"), vimg = document.getElementById("viewerImg"), zoomBtn = document.getElementById("zoomBtn");
+document.addEventListener("click", e => {
+  const f = e.target.closest(".fig");
+  if (f){ vimg.src = f.querySelector("img").src; vimg.alt = f.getAttribute("aria-label") || ""; viewer.classList.remove("big"); zoomBtn.textContent = "Zoom in"; viewer.showModal(); return; }
+  const j = e.target.closest("[data-jump]");
+  if (j){ e.preventDefault(); document.getElementById(j.dataset.jump)?.scrollIntoView({behavior:"smooth"}); }
+});
+document.getElementById("closeBtn").onclick = () => viewer.close();
+zoomBtn.onclick = () => { const b = viewer.classList.toggle("big"); zoomBtn.textContent = b ? "Fit to screen" : "Zoom in"; };
+viewer.addEventListener("click", e => { if (e.target.classList.contains("scroll")) viewer.close(); });
+
+function render(){
+  const h = ROUTE;
+  const m = h.match(/^#\/work\/(.+)$/);
+  const s = h.match(/^#\/s\/(.+)$/);
+  if (!m && !s && h && h !== "#/" && document.querySelector(".case-page")) return;
+  const p = m && CONTENT.projects.find(x => x.id === decodeURIComponent(m[1]));
+  const app = document.getElementById("app");
+  peek.classList.remove("on");
+  document.body.style.overflow = "";
+  if (p){ app.innerHTML = nav() + study(p); document.title = `${p.title}, ${CONTENT.name}`; window.scrollTo(0, 0); }
+  else {
+    const onHome = !!document.querySelector(".hero");
+    if (!onHome || !s){
+      app.innerHTML = nav() + home(); document.title = `${CONTENT.name}, ${CONTENT.what}`; runDemo();
+      window.scrollTo(0, 0);
+    }
+    if (s){
+      const id = s[1], el = document.getElementById(id);
+      const behavior = matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+      requestAnimationFrame(() => {
+        if (id === "about" || !el) window.scrollTo({top:0, behavior});
+        else el.scrollIntoView({block:"start", behavior});
+      });
+    }
+  }
+}
+window.addEventListener("hashchange", () => { if ((location.hash || "#/") !== ROUTE){ ROUTE = location.hash || "#/"; render(); } });
+render();
+</script>
+</body>
+</html>
